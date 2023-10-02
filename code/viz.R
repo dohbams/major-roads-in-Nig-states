@@ -49,19 +49,22 @@ for (state_name in names(clipped_roads)) {
   # Extract the clipped roads for the current state
   clipped_road <- clipped_roads[[state_name]]
   
+  # Calculate the total length of roads in kilometers for the current state
+  total_length_kilometers <- sum(st_length(clipped_road)) / 1000  # Convert to kilometers
+  
   # Create a plot using ggplot2
   plot <- ggplot() +
     geom_sf(data = state_sf[state_sf$statename == state_name, ], fill = "white", color = "grey29", size = 0.009) +
     geom_sf(data = clipped_road, aes(color = class), linewidth = 0.15) +
-    scale_color_manual(values = class_colors, guide = guide_legend(nrow = 1)) +  # Set the color scale
-    labs(subtitle = state_name) + 
+    labs(title = state_name, subtitle = paste(round(total_length_kilometers, 2), "km")) + 
     theme_minimal() +
     theme(
       panel.grid = element_blank(),
       text = element_text(family = 'Tw Cen MT'),
       legend.position = 'none',
       axis.text = element_blank(),
-      plot.subtitle = element_text(hjust = 0.5),
+      plot.title = element_text(hjust = 0.5, size = 16, face = "bold", colour = "grey2"),
+      plot.subtitle = element_text(hjust = 0.5, size = 10, face = "bold", colour = "grey30")
     )
   
   map_plots[[state_name]] <- plot
