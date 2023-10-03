@@ -1,0 +1,20 @@
+project:
+  type: website
+  output-dir: docs
+
+website:
+  title: "Road"
+  search: true
+
+format:
+  html:
+    theme: 
+      - lux
+      - custom.scss
+    css: styles.css
+    toc: true
+    page-layout: custom
+    
+
+
+
