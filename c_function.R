@@ -76,15 +76,19 @@ create_outputs <- function(state_sf = t_state_sf, road_sf = t_road_sf, state_cap
     zone <- "South East"
   }
   
+  # Define a color palette for the road classes
+  class_colors <- c("Trunk" = "#df7a6f", "Primary" = "#e3cb7e", "Secondary" = "#8c82ec")
+  
   # Plot 
   fig_output <- ggplot2::ggplot() +
     ggplot2::geom_sf(
       data = dplyr::filter(state_sf, .data[["statename"]] == state_capital_name),
-      fill = "white", 
-      color = "#050505", 
+      fill = "#FFFFFF", 
+      color = "#000000", 
       size = 0.009
     ) +
-    ggplot2::geom_sf(data = clipped_road, aes(color = class), linewidth = 0.15) +
+    ggplot2::geom_sf(data = clipped_road, ggplot2::aes(color = class), linewidth = 0.15) +
+    ggplot2::scale_color_manual(values = class_colors) +
     ggplot2::theme_minimal() +
     ggplot2::theme(
       panel.grid = ggplot2::element_blank(),
