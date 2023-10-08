@@ -202,11 +202,6 @@ p {
           letter-spacing: 1px;
         }
       }
-      
-      &:hover {
-        cursor: pointer;
-        
-      }
     }
     
   }
@@ -221,6 +216,99 @@ p {
     
     .more-info-container {
       right: 0.7rem;
+    }
+  }
+}
+
+
+
+.download-container {
+  background-color: #FFFFFF;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  border: 1px solid #FFFFFF;
+  border-radius: 8px;
+  transition: .5s ease;
+  
+  .top {
+    i {
+      font-size: 1rem;
+      color: #E8E8E8;
+    }
+  }
+  
+  .middle {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+    i {
+      font-size: 5rem;
+      color: #999999;
+      transition: .5s ease;
+    }
+    
+    p {
+      font-size: 1rem;
+    }
+  }
+  
+  .horizontal-divider {
+    border-bottom: 1px solid #DDDDDD;
+    width: 80%;
+    margin: 0.5rem auto;
+  }
+  
+  .bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+    .file-info {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      
+      h6 {
+        text-transform: none;
+        color: #888888;
+      }
+      
+      p {
+        font-weight: 500;
+        color: #999999;
+      }
+    }
+    
+    .dowload-btn {
+      height: 2.8rem;
+      width: 2.8rem;
+      background-color: #F7F7F7;
+      border: 1px solid #F7F7F7;
+      border-radius: 8px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: .5s ease;
+    }
+  }
+  
+  &:hover {
+    border-color: #999999;
+    
+    .middle {
+      i {
+        color: #888888;
+      }
+    }
+    
+    .bottom {
+      .dowload-btn {
+        background-color: #333333;
+        border-color: #888888;
+        color: #FFFFFF;
+      }
     }
   }
 }
@@ -384,6 +472,41 @@ p {
     }
   }
   
+  .download-container {
+    
+    .middle {
+
+      i {
+        font-size: 3.8rem;
+      }
+      
+      p {
+        font-size: 0.8rem;
+      }
+    }
+
+    
+    .bottom {
+
+      .file-info {
+        
+        h6 {
+          font-size: 0.8rem;
+        }
+        
+        p {
+          font-size: 0.8rem;
+        }
+      }
+      
+      .dowload-btn {
+        height: 2.3rem;
+        width: 2.3rem;
+      }
+    }
+  }
+
+  
   .footer {
     width: 90%;
     
@@ -414,6 +537,53 @@ p {
 }
 
 @media (min-width: 992px) and (max-width: 1024px) {
+  
+  .download-container {
+    
+     .top {
+      i {
+        font-size: 1rem;
+      }
+    }
+    
+    .middle {
+
+      i {
+        font-size: 3.7rem;
+      }
+      
+      p {
+        font-size: 0.7rem;
+      }
+    }
+    
+    .horizontal-divider {
+      margin: 0.3rem auto;
+    }
+    
+    .bottom {
+      .file-info {
+        
+        h6 {
+          font-size: 0.7rem;
+          
+        }
+        
+        p {
+          font-size: 0.7rem;
+        }
+      }
+      
+      .dowload-btn {
+        height: 2.2rem;
+        width: 2.2rem;
+        
+        i {
+          font-size: 0.8rem;
+        }
+      }
+    }
+  }
   
   .footer {
     width: 90%;
@@ -457,10 +627,61 @@ p {
     padding-right: 2rem;
   }
   
+  .download-container {
+    height: 100%;
+    padding: 2rem;
+    border-radius: 8px;
+    
+     .top {
+      i {
+        font-size: 2rem;
+      }
+    }
+    
+    .middle {
+
+      i {
+        font-size: 8rem;
+      }
+      
+      p {
+        font-size: 1.5rem;
+      }
+    }
+    
+    .horizontal-divider {
+      margin: 1.4rem auto;
+    }
+    
+    .bottom {
+      .file-info {
+        
+        h6 {
+          font-size: 1.8rem;
+          
+        }
+        
+        p {
+          font-size: 1.8rem;
+        }
+      }
+      
+      .dowload-btn {
+        height: 4rem;
+        width: 4rem;
+        
+        i {
+          font-size: 1.5rem;
+        }
+      }
+    }
+  }
+  
   .footer {
     width: 50%;
   }
 }
+
 
 
 // Scroll bar
