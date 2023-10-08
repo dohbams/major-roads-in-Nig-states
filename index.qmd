@@ -175,6 +175,57 @@ cat(res, sep = "\n")
 
 ```
 
+
+<!------ PDF Download ------------------------------------------------------>
+::: {.g-col-12 .g-col-md-4 .g-col-lg-3}
+
+```{r}
+
+tags$div(
+  class = "download-container",
+  
+  tags$div(
+    class = "top",
+    
+    tags$i(class = "bi bi-star")
+  ),
+  
+  tags$div(
+    class = "middle",
+    
+    tags$i(class = "bi bi-file-earmark-pdf-fill"),
+    
+    tags$p(class = "label", "Major Road.pdf")
+  ),
+  
+  tags$div(class = "horizontal-divider"),
+  
+  tags$div(
+    class = "bottom",
+    
+    tags$div(
+      class = "file-info",
+      
+      tags$h6("File size:"),
+      tags$p("~ 493 KB")
+    ),
+    
+    tags$a(
+      download = "",
+      href = "www/assets/roads.pdf",
+      class = "dowload-btn", #btn-default
+      
+      tags$i(class = "bi bi-download")
+    )
+  )
+)
+
+```
+
+
+:::
+<!------ End of PDF Download ----------------------------------------------->
+
 :::
 <!------ End Charts Section ------------------------------------------------>
 
