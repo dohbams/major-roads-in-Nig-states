@@ -1,0 +1,301 @@
+---
+echo: false
+warning: false
+message: false
+---
+
+```{r}
+
+# Import library
+library(htmltools)
+
+```
+
+
+```{r}
+
+# Source report custom functions
+source("c_function.R")
+
+```
+
+
+```{r}
+
+# Import and transform shape files
+t_state_sf <- load_transform("data/state.shp")
+t_road_sf  <- load_transform("data/road.shp")
+
+
+```
+
+
+<!------ Page container ------------------------------------------------------->
+::: {.container .mx-3}
+
+<!------ Top section ------------------------------------------------------->
+::: {.top-section .mb-5}
+
+<h3 class="page-title">Distribution of Major Roads Among Nigerian States</h3>
+
+
+<!------ Grid ------------------------------------------------------->
+::: {.grid}
+
+
+::: {.g-col-12 .g-col-md-8}
+
+<p class="text-summary">
+Nigeria's vast territory is intricately woven together by an expansive network of major roads, stretching a
+remarkable 68,926 kilometers in total. These roads encompass a hierarchy of connectivity: the trunk roads
+uniting states, the primary roads linking local governments, and the secondary roads that seamlessly connect
+towns and cities. This comprehensive overview visualization not only showcases the intricate web of roadways
+that crisscross the nation but also provides a captivating breakdown of the total road length in kilometers for each individual state.
+</p>
+
+:::
+
+::: {.g-col-12 .g-col-md-4}
+
+```{r}
+
+# Legend Container
+tags$div(
+  class = "legend-container",
+  
+  
+  tags$div(
+    class = "legend",
+    
+    tags$div(
+      class = "title-icon",
+      
+      tags$h4(class = "title", "Legend"),
+      tags$i(class = "bi bi-compass")
+    ),
+    
+    tags$div(
+      class = "text",
+      tags$div(class = "pipe truck"),
+      tags$h6("Trunk Road")
+    ),
+    
+    tags$div(
+      class = "text",
+      tags$div(class = "pipe primary"),
+      tags$h6("Primary Road")
+    ),
+    
+    tags$div(
+      class = "text",
+      tags$div(class = "pipe secondary"),
+      tags$h6("Secondary Road")
+    )
+  )
+)
+
+```
+
+:::
+
+
+:::
+<!------ End Grid ------------------------------------------------------->
+
+:::
+<!------ End Top section --------------------------------------------------->
+
+
+
+
+<!------ Charts Section ---------------------------------------------------->
+::: {.grid .mb-3}
+
+
+```{r}
+#| output: asis
+
+res <- purrr::map_chr(
+  sort(t_state_sf$statename),
+  
+  \(state_name) {
+    
+    knitr::knit_child(
+      text = c(
+        "::: {.g-col-12 .g-col-md-4 .g-col-lg-3}",
+        "",
+        
+        "```{r}",
+        
+        "temp <- create_outputs(state_capital_name = state_name)",
+        
+        "```",
+        
+        "<div class='sf-container'>",
+        "<h4 class='title' data-bs-toogle='tooltip' data-bs-placement='top' title='State Name'>`r state_name`</h4>",
+        "<h5 class='subtitle' data-bs-toogle='tooltip' data-bs-placement='top' title='Total Road Length'>`r temp$total_km`</h5>",
+        
+        "```{r}",
+        
+        "temp$plot",
+        
+
+        "```",
+        
+        "<div class='more-info-container'>",
+        
+        "<div class='content'>",
+        
+        "<p class='record'>Zone: <span class='zone'>`r temp$loc_zone`</span></p>",
+        
+        "<div class='horizontal-divider'></div>",
+        
+        "<div class='rec-row'><h6 class='title truck'>Truck:</h6><h6 class='value'>`r temp$Trunk`</h6></div>",
+        "<div class='rec-row'><h6 class='title primary'>Primary:</h6><h6 class='value'>`r temp$Primary`</h6></div>",
+        "<div class='rec-row'><h6 class='title secondary'>Secondary:</h6><h6 class='value'>`r temp$Secondary`</h6></div>",
+        
+        "</div>",
+        
+        "</div>",
+
+        "</div>",
+        
+        
+        ":::",
+        ""
+      ),
+      envir = environment(),
+      quiet = TRUE
+    )
+    
+  }
+)
+
+cat(res, sep = "\n")
+
+```
+
+
+<!------ PDF Download ------------------------------------------------------>
+::: {.g-col-12 .g-col-md-4 .g-col-lg-3}
+
+```{r}
+
+tags$div(
+  class = "download-container",
+  
+  tags$div(
+    class = "top",
+    
+    tags$i(class = "bi bi-star")
+  ),
+  
+  tags$div(
+    class = "middle",
+    
+    tags$i(class = "bi bi-file-earmark-pdf-fill"),
+    
+    tags$p(class = "label", "Major Road.pdf")
+  ),
+  
+  tags$div(class = "horizontal-divider"),
+  
+  tags$div(
+    class = "bottom",
+    
+    tags$div(
+      class = "file-info",
+      
+      tags$h6("File size:"),
+      tags$p("~ 493 KB")
+    ),
+    
+    tags$a(
+      download = "",
+      href = "www/assets/roads.pdf",
+      class = "dowload-btn", #btn-default
+      
+      tags$i(class = "bi bi-download")
+    )
+  )
+)
+
+```
+
+
+:::
+<!------ End of PDF Download ----------------------------------------------->
+
+:::
+<!------ End Charts Section ------------------------------------------------>
+
+
+:::
+<!------ End Page container --------------------------------------------------->
+
+
+
+<!-------- Footer ------------------------------------------------------------->
+
+::: {.mt-5}
+
+```{r}
+
+tags$div(
+  class = "footer",
+  
+  tags$div(
+    class = "f-column maintainer-add",
+    
+    tags$a(class = "github-text", "@Doh_Bams", href="https://github.com/dohbams"),
+    tags$i(class = "bi bi-github")
+  ),
+  
+  tags$div(class = "vertical-divider"),
+  
+  tags$div(
+    class = "f-column r-library",
+    
+    tags$p(class = "r-text", "R"),
+    tags$p(class = "text", "{ sf, tidyverse }")
+  ),
+  
+  tags$div(class = "vertical-divider"),
+  
+  tags$div(
+    class = "f-column data",
+    
+    tags$p(class = "data-title", "Data:"),
+    tags$p(class = "text", "OSM, GRID3")
+    
+  )
+)
+
+
+```
+
+
+:::
+<!-------- End of Footer ------------------------------------------------------>
+
+
+<!-------- JavaScript --------------------------------------------------------->
+```{js}
+
+$(document).ready(
+
+  var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+  
+  var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+  
+    return new bootstrap.Tooltip(tooltipTriggerEl);
+    
+  });
+);
+
+```
+
+
+
+
+
